@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- You can include any head elements here if needed -->
+</head>
+
+<body>
+    <!-- Title -->
+    <font size="8" color="green">Final test lab</font><br><br>
+
+    <!-- Label and Input for Number of Rows -->
+    <label for="t1" id="labelRows">Number of rows:</label>
+    <input type="text" id="t1" /><br><br>
+
+    <!-- Label and Input for Number of Columns -->
+    <label for="t2" id="labelCols">Number of cols:</label>
+    <input type="text" id="t2" /><br><br>
+
+    <!-- Button to Generate Table -->
+    <button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+
+    <!-- Button to Add Column -->
+    <button id="b2" onclick="addColumn()">Add Column</button>
+
+    <!-- Button to Add Row -->
+    <button id="b3" onclick="addRow()">Add Row</button>
+
+    <!-- Container for the generated table -->
+    <div id="table-container"></div>
+
+    <!-- JavaScript Section -->
+    <script language="javascript">
+        // Function to generate the table based on user input
+        function generateTable() {
+            var rows = document.getElementById('t1').value;
+            var cols = document.getElementById('t2').value;
+            var tableHTML = '<table border="5">';
+
+            for (var i = 0; i < rows; i++) {
+                tableHTML += '<tr>';
+                for (var j = 0; j < cols; j++) {
+                    tableHTML += '<td>Row: ' + (i + 1) + ', Coloumn: ' + (j + 1) + '</td>';
+                }
+                tableHTML += '</tr>';
+            }
+
+            tableHTML += '</table>';
+
+            document.getElementById('table-container').innerHTML = tableHTML;
+
+            // Hide unnecessary elements after generating the table
+            document.getElementById('b1').style.display = 'none';
+            document.getElementById('labelRows').style.display = 'none';
+            document.getElementById('t1').style.display = 'none';
+            document.getElementById('labelCols').style.display = 'none';
+            document.getElementById('t2').style.display = 'none';
+        }
+
+        // Function to add a column to the generated table
+        function addColumn() {
+            var table = document.querySelector('table');
+
+            if (table) {
+                var rowCount = table.rows.length;
+
+                for (var i = 0; i < rowCount; i++) {
+                    var cell = table.rows[i].insertCell(-1);
+                    cell.innerHTML = 'Row: ' + (i + 1) + ', Coloumn: ' + table.rows[i].cells.length;
+                }
+            }
+        }
+
+        // Function to add a row to the generated table
+        function addRow() {
+            var table = document.querySelector('table');
+
+            if (table) {
+                var newRow = table.insertRow(-1);
+                var cellCount = table.rows[0].cells.length;
+
+                for (var i = 0; i < cellCount; i++) {
+                    var cell = newRow.insertCell(-1);
+                    cell.innerHTML = 'Row:  ' + (table.rows.length) + ', Coloumns: ' + (i + 1);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
